@@ -1,0 +1,1 @@
+console.log('your mothers a whore')
