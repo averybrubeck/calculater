@@ -1,9 +1,10 @@
-* {
-    border: 2px solid black;
-}
+
 
 body {
     background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #container {
     display: flex;

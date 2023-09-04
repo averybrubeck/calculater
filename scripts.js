@@ -49,6 +49,7 @@ function operatorButtons() {
     const minus = document.querySelector('.minus-button')
     const div = document.querySelector('.div-button')
     const mult = document.querySelector('.mult-button')
+    const clear = document.querySelector('.clear-button')
     const viewport = document.querySelector('.view-container')
 
     function buttonClick(){
@@ -69,6 +70,9 @@ function operatorButtons() {
         })
         mult.addEventListener('click', function(){
             viewport.textContent = '*'
+        })
+        clear.addEventListener('click', function(){
+            viewport.textContent = ""
         })
        
     } buttonClick();
