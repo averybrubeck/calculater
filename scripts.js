@@ -1,3 +1,4 @@
+const viewport = document.querySelector('.view-container')
 function numberButtons() {
     const one = document.querySelector('.one-button')
     const two = document.querySelector('.two-button')
@@ -8,35 +9,34 @@ function numberButtons() {
     const seven = document.querySelector('.seven-button')
     const eight = document.querySelector('.eight-button')
     const nine = document.querySelector('.nine-button')
-    const viewport = document.querySelector('.view-container')
 
     function buttonClick(){
         one.addEventListener('click', function(){
-            viewport.textContent = '1'
+            viewport.textContent += 1
         })
         two.addEventListener('click', function(){
-            viewport.textContent = '2'
+            viewport.textContent += 2
         })
         three.addEventListener('click', function(){
-            viewport.textContent = '3'
+            viewport.textContent += 3
         })
         four.addEventListener('click', function(){
-            viewport.textContent = '4'
+            viewport.textContent += 4
         })
         five.addEventListener('click', function(){
-            viewport.textContent = '5'
+            viewport.textContent += 5
         })
         six.addEventListener('click', function(){
-            viewport.textContent = '6'
+            viewport.textContent += 6
         })
         seven.addEventListener('click', function(){
-            viewport.textContent = '7'
+            viewport.textContent += 7
         })
         eight.addEventListener('click', function(){
-            viewport.textContent = '8'
+            viewport.textContent += 8
         })
         nine.addEventListener('click', function(){
-            viewport.textContent = '9'
+            viewport.textContent += 9
         })
        
     } buttonClick();
@@ -50,31 +50,30 @@ function operatorButtons() {
     const div = document.querySelector('.div-button')
     const mult = document.querySelector('.mult-button')
     const clear = document.querySelector('.clear-button')
-    const viewport = document.querySelector('.view-container')
+  
 
     function buttonClick(){
         zero.addEventListener('click', function(){
-            viewport.textContent = '0'
+            viewport.textContent += 0
         })
         equals.addEventListener('click', function(){
             viewport.textContent = '='
         })
         plus.addEventListener('click', function(){
-            viewport.textContent = '+'
+            viewport.textContent += '+'
         })
         minus.addEventListener('click', function(){
-            viewport.textContent = '-'
+            viewport.textContent += '-'
         })
         div.addEventListener('click', function(){
-            viewport.textContent = '/'
+            viewport.textContent += '/'
         })
         mult.addEventListener('click', function(){
-            viewport.textContent = '*'
+            viewport.textContent += '*'
         })
         clear.addEventListener('click', function(){
             viewport.textContent = ""
-        })
-       
+        }) 
     } buttonClick();
 }
 operatorButtons();
