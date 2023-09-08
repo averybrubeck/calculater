@@ -95,22 +95,23 @@ function operatorButtons() {
 }
 operatorButtons();
 function compute() {
-    
-    
-    switch (this.operation) {
-        case '+':
-            value = previousOperand + currentOperand
-            break;
-        case '-':
-            value = currentOperand - previousOperand
-            break;
-        case '*':
-            value = previousOperand * currentOperand
-            break;
-        case '/':
-            value = previousOperand / currentOperand
-            break;
-
+    if (previousOperand !== null && operator !== null && currentOperand !== null) {
+        switch (operator) {
+            case '+':
+                currentOperand = parseFloat(previousOperand) + parseFloat(currentOperand);
+                break;
+            case '-':
+                currentOperand = parseFloat(previousOperand) - parseFloat(currentOperand);
+                break;
+            case '*':
+                currentOperand = parseFloat(previousOperand) * parseFloat(currentOperand);
+                break;
+            case '/':
+                currentOperand = parseFloat(previousOperand) / parseFloat(currentOperand);
+                break;
+        }
+        previousOperand = null;
+        operator = null;
+        viewport.textContent = currentOperand;
     }
-
 }
