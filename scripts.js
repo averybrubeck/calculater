@@ -16,30 +16,39 @@ function numberButtons() {
     function buttonClick(){
         one.addEventListener('click', function(){
             viewport.textContent += 1
+            currentOperand = 1
         })
         two.addEventListener('click', function(){
             viewport.textContent += 2
+            currentOperand = 2
         })
         three.addEventListener('click', function(){
             viewport.textContent += 3
+            currentOperand = 3
         })
         four.addEventListener('click', function(){
             viewport.textContent += 4
+            currentOperand = 4
         })
         five.addEventListener('click', function(){
             viewport.textContent += 5
+            currentOperand = 5
         })
         six.addEventListener('click', function(){
             viewport.textContent += 6
+            currentOperand = 6
         })
         seven.addEventListener('click', function(){
             viewport.textContent += 7
+            currentOperand = 7
         })
         eight.addEventListener('click', function(){
             viewport.textContent += 8
+            currentOperand = 8
         })
         nine.addEventListener('click', function(){
             viewport.textContent += 9
+            currentOperand = 9
         })
        
     } buttonClick();
@@ -60,11 +69,12 @@ function operatorButtons() {
             viewport.textContent += 0
         })
         equals.addEventListener('click', function(){
-            viewport.textContent = '='
             compute()
+            viewport.textContent = value
         })
         plus.addEventListener('click', function(){
             viewport.textContent += '+'
+            previousOperand = numberButtons()
         })
         minus.addEventListener('click', function(){
             viewport.textContent += '-'
@@ -79,7 +89,7 @@ function operatorButtons() {
             viewport.textContent = ""
             currentOperand = null
             previousOperand = null
-            value = null
+            value = 'your mothers a whore'
         }) 
     } buttonClick();
 }
