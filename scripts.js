@@ -1,4 +1,7 @@
 const viewport = document.querySelector('.view-container')
+let value = null;
+let currentOperand = null
+let previousOperand = null
 function numberButtons() {
     const one = document.querySelector('.one-button')
     const two = document.querySelector('.two-button')
@@ -58,6 +61,7 @@ function operatorButtons() {
         })
         equals.addEventListener('click', function(){
             viewport.textContent = '='
+            compute()
         })
         plus.addEventListener('click', function(){
             viewport.textContent += '+'
@@ -73,7 +77,30 @@ function operatorButtons() {
         })
         clear.addEventListener('click', function(){
             viewport.textContent = ""
+            currentOperand = null
+            previousOperand = null
+            value = null
         }) 
     } buttonClick();
 }
 operatorButtons();
+function compute() {
+    
+    
+    switch (this.operation) {
+        case '+':
+            value = previousOperand + currentOperand
+            break;
+        case '-':
+            value = currentOperand - previousOperand
+            break;
+        case '*':
+            value = previousOperand * currentOperand
+            break;
+        case '/':
+            value = previousOperand / currentOperand
+            break;
+
+    }
+
+}
