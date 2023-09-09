@@ -1,117 +1,129 @@
-const viewport = document.querySelector('.view-container')
-let value = null;
-let currentOperand = null
-let previousOperand = null
-function numberButtons() {
-    const one = document.querySelector('.one-button')
-    const two = document.querySelector('.two-button')
-    const three = document.querySelector('.three-button')
-    const four = document.querySelector('.four-button')
-    const five = document.querySelector('.five-button')
-    const six = document.querySelector('.six-button')
-    const seven = document.querySelector('.seven-button')
-    const eight = document.querySelector('.eight-button')
-    const nine = document.querySelector('.nine-button')
 
-    function buttonClick(){
-        one.addEventListener('click', function(){
-            viewport.textContent += 1
-            currentOperand = 1
-        })
-        two.addEventListener('click', function(){
-            viewport.textContent += 2
-            currentOperand = 2
-        })
-        three.addEventListener('click', function(){
-            viewport.textContent += 3
-            currentOperand = 3
-        })
-        four.addEventListener('click', function(){
-            viewport.textContent += 4
-            currentOperand = 4
-        })
-        five.addEventListener('click', function(){
-            viewport.textContent += 5
-            currentOperand = 5
-        })
-        six.addEventListener('click', function(){
-            viewport.textContent += 6
-            currentOperand = 6
-        })
-        seven.addEventListener('click', function(){
-            viewport.textContent += 7
-            currentOperand = 7
-        })
-        eight.addEventListener('click', function(){
-            viewport.textContent += 8
-            currentOperand = 8
-        })
-        nine.addEventListener('click', function(){
-            viewport.textContent += 9
-            currentOperand = 9
-        })
-       
-    } buttonClick();
-}
-numberButtons();
-function operatorButtons() {
-    const zero = document.querySelector('.zero-button')
-    const equals = document.querySelector('.equals-button')
-    const plus = document.querySelector('.plus-button')
-    const minus = document.querySelector('.minus-button')
-    const div = document.querySelector('.div-button')
-    const mult = document.querySelector('.mult-button')
-    const clear = document.querySelector('.clear-button')
-  
-
-    function buttonClick(){
-        zero.addEventListener('click', function(){
-            viewport.textContent += 0
-        })
-        equals.addEventListener('click', function(){
-            compute()
-            viewport.textContent = value
-        })
-        plus.addEventListener('click', function(){
-            viewport.textContent += '+'
-            previousOperand = numberButtons()
-        })
-        minus.addEventListener('click', function(){
-            viewport.textContent += '-'
-        })
-        div.addEventListener('click', function(){
-            viewport.textContent += '/'
-        })
-        mult.addEventListener('click', function(){
-            viewport.textContent += '*'
-        })
-        clear.addEventListener('click', function(){
-            viewport.textContent = ""
-            currentOperand = null
-            previousOperand = null
-            value = 'your mothers a whore'
-        }) 
-    } buttonClick();
-}
-operatorButtons();
-function compute() {
-    if (previousOperand !== null && operator !== null && currentOperand !== null) {
-        switch (operator) {
-            case '+':
-                currentOperand = parseFloat(previousOperand) + parseFloat(currentOperand);
-                break;
-            case '-':
-                currentOperand = parseFloat(previousOperand) - parseFloat(currentOperand);
-                break;
-            case '*':
-                currentOperand = parseFloat(previousOperand) * parseFloat(currentOperand);
-                break;
-            case '/':
-                currentOperand = parseFloat(previousOperand) / parseFloat(currentOperand);
-                break;
-        }
-        previousOperand = null;
-        operator = null;
-        viewport.textContent = currentOperand;
+class Calculator {
+    constructor(previousOperandTextElement, currentOperandTextElement) {
+      this.previousOperandTextElement = previousOperandTextElement
+      this.currentOperandTextElement = currentOperandTextElement
+      this.clear()
     }
-}
+  
+    clear() {
+      this.currentOperand = ''
+      this.previousOperand = ''
+      this.operation = undefined
+    }
+  
+    delete() {
+      this.currentOperand = this.currentOperand.toString().slice(0, -1)
+    }
+  
+    appendNumber(number) {
+      if (number === '.' && this.currentOperand.includes('.')) return
+      this.currentOperand = this.currentOperand.toString() + number.toString()
+    }
+  
+    chooseOperation(operation) {
+      if (this.currentOperand === '') return
+      if (this.previousOperand !== '') {
+        this.compute()
+      }
+      this.operation = operation
+      this.previousOperand = this.currentOperand
+      this.currentOperand = ''
+    }
+  
+    compute() {
+      let computation
+      const prev = parseFloat(this.previousOperand)
+      const current = parseFloat(this.currentOperand)
+      if (isNaN(prev) || isNaN(current)) return
+      switch (this.operation) {
+        case '+':
+          computation = prev + current
+          break
+        case '-':
+          computation = prev - current
+          break
+        case '*':
+          computation = prev * current
+          break
+        case '÷':
+          computation = prev / current
+          break
+        default:
+          return
+      }
+      this.currentOperand = computation
+      this.operation = undefined
+      this.previousOperand = ''
+    }
+  
+    getDisplayNumber(number) {
+      const stringNumber = number.toString()
+      const integerDigits = parseFloat(stringNumber.split('.')[0])
+      const decimalDigits = stringNumber.split('.')[1]
+      let integerDisplay
+      if (isNaN(integerDigits)) {
+        integerDisplay = ''
+      } else {
+        integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+      }
+      if (decimalDigits != null) {
+        return `${integerDisplay}.${decimalDigits}`
+      } else {
+        return integerDisplay
+      }
+    }
+  
+    updateDisplay() {
+      this.currentOperandTextElement.innerText =
+        this.getDisplayNumber(this.currentOperand)
+      if (this.operation != null) {
+        this.previousOperandTextElement.innerText =
+          `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+      } else {
+        this.previousOperandTextElement.innerText = ''
+      }
+    }
+  }
+  
+  
+  const numberButtons = document.querySelectorAll('[data-number]')
+  const operationButtons = document.querySelectorAll('[data-operation]')
+  const equalsButton = document.querySelector('[data-equals]')
+  const deleteButton = document.querySelector('[data-delete]')
+  const allClearButton = document.querySelector('[data-all-clear]')
+  const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+  const currentOperandTextElement = document.querySelector('[data-current-operand]')
+  
+  const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
+  
+  numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      calculator.appendNumber(button.textContent)
+      calculator.updateDisplay()
+    })
+  })
+  
+  operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      calculator.chooseOperation(button.textContent)
+      calculator.updateDisplay()
+    })
+  })
+  
+  equalsButton.addEventListener('click', button => {
+    calculator.compute()
+    calculator.updateDisplay()
+  })
+  
+  allClearButton.addEventListener('click', button => {
+    calculator.clear()
+    calculator.updateDisplay()
+  })
+  
+  deleteButton.addEventListener('click', button => {
+    calculator.delete()
+    calculator.updateDisplay()
+  })
+  
+  

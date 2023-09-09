@@ -1,38 +1,83 @@
-
+@import url('https://fonts.cdnfonts.com/css/calculator');
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Calculator', sans-serif, Times, serif;
+    font-weight: normal;
+}
 
 body {
-    background-color: aquamarine;
+   padding: 0;
+    margin: 0;
+      margin-top: 0px;
+    background: linear-gradient(to right, #00aaff, #00ff6c);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: center;
+    margin-top: 100px;
 }
-#container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container {
+    border: 2px solid rgba(47, 48, 48, 0.75);
+    width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: white;
+    
 }
-#calc-body {
-    display: flex;
-    align-items: center;
+.calculator-grid {
+    display: grid;
     justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    gap: 5px;
+}  
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border-radius: 25px;
+    border: 1px solid #e3e1d5;
+    outline: none;
+    background-color: rgba(230, 229, 223, .75);
+  }
+  
+  .calculator-grid > button:hover {
+    background-color: rgba(255, 255, 255, .9);
+  }
+  
+  .span-two {
+    grid-column: span 2;
+  }
+
+  .output {
+    grid-column: 1 / -1;
+    background-color: rgba(109, 123, 135, .75);
+    display: flex;
+    justify-content: space-around;
     flex-direction: column;
-    width: 960px;
+    border-radius: 20px;
+    padding: 20px;
+    word-wrap: break-word;
+    word-break: break-all;
+    caret-color: transparent;
+  }
+
+  .previous-operand {
+    color: rgba(47, 48, 48, .75);
+    font-size: 2rem;
+  }
+  .current-operand {
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 3rem;
+  }
+#del-button {
+    background-color: #ba2929;
 }
-#calc-header {
-    display: flex;
-    justify-content: top;
+#del-button:hover {
+    background-color: #f53333;
 }
-#button-container {
-    display: flex;
-    flex-direction: row;
+#ac-button {
+    background-color: #3dbf4c;
 }
-#number-buttons {
-    display: grid;
-    grid-template-columns:  50px 50px 50px;
-    grid-template-rows: auto;
-}
-#operator-buttons {
-    display: grid;
-    grid-template-columns: 75px 75px;
-    grid-template-rows: auto;
+#ac-button:hover {
+    background-color: #4cfc60;
 }
